@@ -27,3 +27,25 @@ class Webcam:
                 break
         cap.release()
         cv.destroyAllWindows()
+    
+    #function to take videos instead of live capture
+    def playVid(self, filename):
+        cap = cv.VideoCapture(filename)
+
+        while cap.isOpened():
+            #capture each frame
+            ret, frame = cap.read()
+
+            
+            if not ret:
+                print("Can't receive frame. Exiting...")
+                break
+
+            gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+            #display resulting frame
+            cv.imshow('frame',gray)
+            #set q as quit key
+            if cv.waitKey(1) == ord('q'):
+                break
+        cap.release()
+        cv.destroyAllWindows()
